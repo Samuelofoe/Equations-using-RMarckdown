@@ -1,0 +1,83 @@
+$$\begin{array}{lll}
+Symbol& \text { Value } & {Description}\\
+\text { Indices }\\
+Y & 22 & \text { Number of years } \\
+W & 52 & \text { Number of weeks in a calender year } \\
+a & 1,2,3,4..... & \text { Pacific Fisheries Management Area(PFMA)} \\
+y & 1,2, \ldots, Y & \text { Year }(1=2000,2=2001, \ldots, Y=2022) \\
+w & 1,2, \ldots, W+1 & \text { Week } \\
+s & 1,2,3,4,5 & \text { Stage of prawn (1=Juvenile, } 2=\text { Male, } 3=\text { Transitional, } 4=\text { Egg carrying Female,) 5=\text { Spent Female } } \\
+\text { Inputs }\\
+C_{a, y}^{(F)} & & \text { Observed commercial catch in PFMA } a \text { of year } y \text { ('000 lbs) } \\
+U_{s, a, y, w} & & \text { Observed stage-composition by PFMA, year, and week } \\
+\text { Parameters }\\
+R_r^{(0)} & 10000 & \text {Assumed unfished recruits(millions) } \\
+R^{(C)} & 7 & \text {Assumed recruitment compensation} \\
+M_s^{(1)} & 0.2 & \text {Assumed natural moratality of juveniles} \\
+M_s^{(2)} & 0.0173077 & \text {Assumed natural moratality of males} \\
+M_s^{(3)} & 0.0173077 & \text {Assumed natural moratality of transitional stage} \\
+M_s^{(4)} & 0.0173077 & \text {Assumed natural moratality of egg carrying females} \\
+M_s^{(5)} & 0.0961538 & \text {Assumed natural moratality of spent Females} \\
+M_s^{(iRF)} & 0.75 & \text {Assumed initial natural moratality of recreational fisheries} \\
+M_s^{(iCF)} & 2 & \text {Assumed initial natural moratality of commercial fisheries} \\
+T_s^{(1 \rightarrow 2)} &0.0192308  & \text {Assumed proprtion of juveniles moving to males } \\
+T_s^{(2\rightarrow3)} &0.025641  & \text {Assumed proprtion of males moving to transitional } \\
+T_s^{(3\rightarrow4)} &0.0961538  & \text {Assumed proprtion of transitional moving to females } \\
+S_{s,1}^{(RF)} & 0 & \text {Assumed recreational fish selectivity of juveniles} \\
+S_{s,2}^{(RF)} & 0.9 & \text {Assumed recreational fish selectivity of males} \\
+S_{s,3}^{(RF)} & 1 & \text {Assumed recreational fish selectivity of transitional} \\
+S_{s,4}^{(RF)} & 0.05 & \text {Assumed recreational fish selectivity of female} \\
+S_{s,1}^{(CF)} & 0 & \text {Assumed commercial fish selectivity of juveniles} \\
+S_{s,2}^{(CF)} & 0.8 & \text {Assumed commercial fish selectivity of males} \\
+S_{s,3}^{(CF)} & 0.9 & \text {Assumed commercial fish selectivity of transitional} \\
+S_{s,4}^{(CF)} & 0.05 & \text {Assumed commercial fish selectivity of female} \\
+q_{s}^{(RF)} & 0.0001 & \text {Assumed catchability of recreational fishery} \\
+q_{s}^{(CF)} & 0.0001 & \text {Assumed catchability of commercial fishery} \\
+phiF	& 0.005599218	&\text {fished spawners per recruit}
+\text { Table 2 }\\
+f(x) = (M_s^{(iRF)},M_s^{(iCF)}, \text Parameters) && \text { Equillibrium condition function }\\\\
+N_{w=1,a,r}&1&\text {Assumed recruit Abundance at the beginning of week 1 by area}\\
+N_a,_{w=1},s^{(1)} &1 & \text {Assumed juvenile Abundance at the beginning of week 1 by area} \\
+N_a,_{w=1,}s^{(2)} &1 & \text {Assumed male Abundance at the beginning of week 1 by area} \\
+N_a,_{w=1,}s^{(3)} &1 & \text {Assumed transitional Abundance at the beginning of week 1 by area} \\
+N_a,_{w=1},s^{(4)} &1 & \text {Assumed egg bearing female Abundance at the beginning of week 1 by area} \\
+N_a,_{w=1,}s^{(5)} &0 & \text {Assumed spent female Abundance at the beginning of week 2 and subsequent weeks by area} \\
+N_{w>1,a,r} \text{  = 1 } \text{if w =1, otherwise =0}& Est.&\text{Recruit Abundance at the beginning of week 2 and subsequent weeks by area}\\
+N_a,_{w>1,}s^{(1)}\text =  {N_{a,w=1},s^{(1)}}+N_a,_{w-1,}s^{(1)}*exp(-M_s^{(1)}-M_s^{(iRF)}/W*S_{s,1}^{(RF)}-M_s^{(iCF)}/W*S_{s,1}^{(CF)}-T_s^{(1\rightarrow2)}) & Est.&\text{Juvenile Abundance at the beginning of week 2 and subsequent weeks by area}\\
+N_a,_{w>1,}s^{(2)}\text =N_a,_{w-1,}s^{(1)}*(1-exp(-T_s^{(1\rightarrow2)})+N_a,_{w-1,}s^{(2)}*exp(-M_s^{(2)}-M_s^{(iRF)}/W*S_{s,2}^{(RF)}-M_s^{(iCF)}/W*S_{s,2}^{(CF)}-T_s^{(2\rightarrow3)}) & Est.&\text{Male Abundance at the beginning of week 2 and subsequent weeks by area}\\
+N_a,_{w>1,}s^{(3)}\text =N_a,_{w-1,}s^{(2)}*(1-exp(-T_s^{(2\rightarrow3)}))+N_a,_{w-1,}s^{(3)}*exp(-M_s^{(3)}-M_s^{(iRF)}/W*S_{s,3}^{(RF)}-M_s^{(iCF)}/W*S_{s,3}^{(CF)}-T_s^{(3\rightarrow4)}) & Est.&\text{Transition Abundance at the beginning of week 2 and subsequent weeks by area}\\
+N_a,_{w>1,}s^{(4)}\text = N_a,_{w-1,}s^{(3)}*(1-exp(-T_s^{(3\rightarrow4)}))+N_a,_{w-1,}s^{(4)}*exp(-M_s^{(4)}-M_s^{(iRF)}/W*S_{s,4}^{(RF)}-M_s^{(iCF)}/W*S_{s,4}^{(CF)}-T_s^{(4\rightarrow5)})& Est.&\text{Egg bearing female Abundance at the beginning of week 2 and subsequent weeks by area}\\
+N_a,_{w>1,}s^{(5)}\text =N_a,_{w-1,}s^{(4)}*(1-exp(-T_s^{(4\rightarrow5)})) +N_a,_{w-1,}s^{(5)}*exp(-M_s^{(5)}) & Est.&\text{Spent female Abundance at the beginning of week 2 and subsequent weeks by area}\\\\
+phi=N_a,_{w=1},s^{(4 =last value)}/W_{lastvalue -1}&Est.&\text{unfished spawners per recruit}\\
+S_0= R_r^{(0)}*phi&Est.&\text{unfished spawners}\\
+recA = R^{(C)}/phi&Est.&\text{Beverton-Holt maximum recruits per spawner}\\
+recB	= (R^{(C)}-1)/(R_r^{(0)}*phi)&Est.&\text{Beverton-Holt density-dependent parameter}\\
+RF	= (recA*phiF-1)/(recB*phiF)&Est.&\text{equilibrium fished recruits}\\\\
+UnF = (Parameters, FRinit=0, FCinit=0) && \text { (Unfished equillibrium conditions ) }\\
+S_00 = UnF^{S0}&Est.&\text{spawners under unfished equillibrium conditions }\\
+phi0= UnF^{phi}&Est.&\text{spawners per recruit under unfished equillibrium conditions }\\
+recA0 =UnF^{recA}&Est.&\text{Beverton-Holt maximum recruits per spawner under unfished equillibrium conditions }\\
+recB0 =UnF^{recB}&Est.&\text{Beverton-Holt density-dependent parameter under unfished equillibrium conditions }\\\\
+
+Fished = (Parameters, FRinit=FRinit, FCinit=FCinit) && \text { ( equillibrium conditions ) }\\
+phiF= Fished^{phi}&Est.&\text{spawners per recruit under fished equillibrium conditions }\\
+RF= Fished^{phi}&Est.&\text{spawners per recruit under fished equillibrium conditions }\\\\
+\text { Population dynamics model }\\
+E^{(RF)} &0&\text{Recreational Fishing effort }\\
+E^{(CF)} &0&\text{Commercial Fishing effort }\\
+PM_{w=1,a,r}&0&\text {recruit Abundance at the beginning of week 1 by area}\\
+PM_a,_{w=1},s^{(1)}=(PM_{w=lastvalue,a,r}+N_a,_{w=last value,}s^{(1)}*exp(-M_s^{(1)}-T_s^{(1 \rightarrow 2)}))*R_r^{(0)} &Est. & \text {juvenile Abundance at the beginning of week 1 by area} \\
+PM_a,_{w=1,}s^{(2)}=(N_a,_{w=last value,}s^{(1)}*(1-exp(-T_s^{(1 \rightarrow 2}))+N_a,_{w=last value,}s^{(2)}*exp(-M_s^{(2)}-T_s^{(2 \rightarrow 3)}))*R_r^{(0)} &Est. & \text {male Abundance at the beginning of week 1 by area} \\
+PM_a,_{w=1,}s^{(3)}=(N_a,_{w=last value,}s^{(2)}*(1-exp(-T_s^{(2 \rightarrow 3}))+N_a,_{w=last value,}s^{(3)}*exp(-M_s^{(3)}-T_s^{(3 \rightarrow 4)}))*R_r^{(0)} &Est & \text {transitional Abundance at the beginning of week 1 by area} \\
+PM_a,_{w=1},s^{(4)}=(N_a,_{w=last value,}s^{(3)}*(1-exp(-T_s^{(3 \rightarrow 4}))+N_a,_{w=last value,}s^{(4)}*exp(-M_s^{(4)}-T_s^{(4 \rightarrow 5)}))*R_r^{(0)} &Est & \text {egg bearing female Abundance at the beginning of week 1 by area} \\
+PM_a,_{w=1,}s^{(5)}=(N_a,_{w=last value,}s^{(4)}*(1-exp(-T_s^{(4 \rightarrow 5}))+N_a,_{w=last value,}s^{(5)}*exp(-M_s^{(5)}))*R_r^{(0)} &0 & \text {spent female Abundance at the beginning of week 2 and subsequent weeks by area} \\\\
+
+
+PM_{w>1,a,r} \text{  = 10000 } \text{if W =52, otherwise =0}& Est.&\text{Recruit Abundance at the beginning of week 2 and subsequent weeks by area}\\
+PM_a,_{w>1,}s^{(1)}\text =PM_{w>1,a,r}+PM_a,_{w-1,}s^{(1)}*exp(-M_s^{(1)}-E^{(RF)}*q_{s}^{(RF)}*S_{s,1}^{(RF)}-E^{(CF)}*q_{s}^{(CF)}*S_{s,1}^{(CF)}-T_s^{(1 \rightarrow 2)})& Est&\text{Juvinile Abundance at the beginning of week 2 and subsequent weeks by area} \\
+PM_a,_{w>1,}s^{(2)}\text = PM_a,_{w>1,}s^{(1)}*(1-exp(-T_s^{(1 \rightarrow 2)}))+PM_a,_{w-1,}s^{(2)}*exp(-M_s^{(2)}-E^{(RF)}*q_{s}^{(RF)}*S_{s,2}^{(RF)}-E^{(CF)}*q_{s}^{(CF)}*S_{s,2}^{(CF)}-T_s^{(2 \rightarrow 3)}))&Est&\text{male Abundance at the beginning of week 2 and subsequent weeks by area}\\
+PM_a,_{w>1,}s^{(3)}\text =PM_a,_{w>1,}s^{(2)}*(1-exp(-T_s^{(2\rightarrow3)}))+PM_a,_{w-1,}s^{(3)}*exp(-M_s^{(3)}-E^{(RF)}*q_{s}^{(RF)}*S_{s,3}^{(RF)}-E^{(CF)}*q_{s}^{(CF)}*S_{s,3}^{(CF)}-T_s^{(3 \rightarrow 4)})&Est&\text{Transitional stage Abundance at the beginning of week 2 and subsequent weeks by area}\\
+PM_a,_{w>1,}s^{(4)}\text =PM_a,_{w>1,}s^{(3)}*(1-exp\text(-T_s^{(2\rightarrow3)}))+PM_a,_{w-1,}s^{(4)}*exp(-M_s^{(4)}-E^{(RF)}*q_{s}^{(RF)}*S_{s,4}^{(RF)}-E^{(CF)}*q_{s}^{(CF)}*S_{s,4}^{(CF)}-T_s^{(4 \rightarrow 5)})&Est&\text{egg female bearing Abundance at the beginning of week 2 and subsequent weeks by area}\\
+PM_a,_{w>1,}s^{(5)}\text =PM_a,_{w>1,}s^{(4)}*(1-exp(-T_s^{(4\rightarrow5)}))+PM_a,_{w-1,}s^{(5)}*exp(-M_s^{(5)})&Est&\text{spent female  Abundance at the beginning of week 2 and subsequent weeks by area}\\
+
+\end{array}$$
